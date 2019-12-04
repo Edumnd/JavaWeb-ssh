@@ -1,0 +1,37 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+   	<!-- 配置目标对象 -->
+    <bean name="target" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="target1" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="target2" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <!-- 配置增强(advice) -->
+    <bean name="before" class="com.briup.aop.before.BeforeTest"></bean>
+    
+    <!-- 配置增强器(advisor = pointcut+advice) -->
+    <bean name="beforeAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+    	<!-- 注入增强 -->
+    	<property name="advice" ref="before"></property>
+    	<!-- 注入切入点(指定那些方法需要增强) -->
+    	<property name="patterns">
+    		<array>
+    			<!-- <value>com.briup.aop.bean.UserDao.deleteUser</value> -->
+    			<value>.*User</value>
+    			<!-- <value>.*</value> -->
+    		</array>
+    	</property>
+    </bean>
+    <!-- 配置代理对象 -->
+    <!-- <bean name="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+    	<property name="target" ref="target"></property>
+    	<property name="interfaces">
+    		<array>
+    			<value>com.briup.aop.bean.UserDao</value>
+    		</array>
+    	</property>
+    	<property name="interceptorNames" value="beforeAdvisor"></property>
+    </bean> -->
+ 	<bean name="proxy" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator"></bean>
+</beans>

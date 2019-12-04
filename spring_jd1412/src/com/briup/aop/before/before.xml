@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+    <!-- 配置被代理对象（目标对象） -->
+    <bean name="target" class="com.briup.proxy.UserDaoImpl"></bean>
+    <bean name="logger" class="com.briup.aop.bean.Logger"></bean>
+    <!-- 配置代理对象将来执行的时候，所要执行的处理程序 -->
+    <bean name="before" class="com.briup.aop.before.BeforeTest">
+    	<property name="logger" ref="logger">
+    	</property>
+    </bean>
+  	<!-- 配置代理对象 -->
+    <bean name="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+    	<!-- 注入目标对象(注入被代理的对象) -->
+    	<property name="target" ref="target"></property>
+    	<!-- 注入代理对象需要实现的所有接口 -->
+    	<property name="interfaces">
+    		<array>
+    			<value>com.briup.proxy.UserDao</value>
+    		</array>
+    	</property>
+    	<!-- 注入代理对象所要执行的处理程序 -->
+    	<property name="interceptorNames" value="before"></property>
+    </bean>
+</beans>

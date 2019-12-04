@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<bean id="dao" class="com.briup.proxy.UserDaoImpl">
+	</bean>
+	<bean name="handler" class="com.briup.proxy.MyHandler">
+		<property name="obj" ref="dao"></property>
+	</bean>
+	<bean id="daoProxy" class="com.briup.proxy.MyProxyFactory">
+		<property name="target" ref="dao"></property>
+		<property name="interfaces">
+			<list>
+				<value>com.briup.proxy.UserDao</value>
+			</list>			
+		</property>
+		<property name="handler" ref="handler"></property>
+	</bean>
+	<bean id="service" class="com.briup.proxy.Service">
+		<property name="dao" ref="daoProxy"></property>
+	</bean>
+</beans>

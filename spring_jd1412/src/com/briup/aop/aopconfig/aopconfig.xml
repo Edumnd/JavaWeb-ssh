@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+	
+	
+	
+	<!-- 增强(所有增强方法) -->
+	<bean name="typeAdvice" class="com.briup.aop.aopconfig.TypeAdvice"></bean>
+	<!-- 目标对象 -->
+	<bean name="dao" class="com.briup.aop.bean.UserDaoImpl"></bean>
+	<bean name="before" class="com.briup.aop.before.BeforeTest"></bean>
+	<!-- aop配置 -->
+	<aop:config>
+		<aop:aspect id="typeAd" ref="typeAdvice">
+			<!-- 定义切入点 -->
+			<aop:pointcut expression="execution(* com.briup.aop.bean.UserDao.*User(..))" id="myMethod"/>
+			<!-- 配置增强 (advisor)类似于spring提供的aop功能中的advisor -->
+			<aop:before method="before" pointcut-ref="myMethod"/>
+			<!-- <aop:after method="after" pointcut-ref="myMethod"/>
+			<aop:after-returning method=""/>
+			<aop:around method="around" pointcut-ref="myMethod"/>
+			<aop:after-throwing method="throwingTest" pointcut-ref="myMethod" throwing="ex"/> -->
+		</aop:aspect>
+		<!-- <aop:pointcut expression="execution(* com.briup.aop.bean.UserDao.*User(..))" id="myMethod"/>
+		<aop:advisor advice-ref="before" pointcut-ref="myMethod"/> -->
+	</aop:config>
+</beans>
+
+
+
+
+

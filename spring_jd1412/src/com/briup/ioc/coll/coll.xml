@@ -1,0 +1,55 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:u="http://www.springframework.org/schema/util"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util-3.2.xsd
+">
+	<bean name="coll" class="com.briup.ioc.coll.CollTest">
+		<property name="arrys">
+		<!-- 直接写一个value相当于给数组赋了一个值 -->
+			<value>
+				array1
+				array2
+				array3
+			</value>
+			<!-- <array>
+				<value>array1</value>
+				<value>array2</value>
+				<value>array3</value>
+			</array> -->
+		</property>
+		<property name="list">
+			<list>
+				<value>list1</value>
+				<value>list2</value>
+				<value>list3</value>
+			</list>
+		</property>
+		<property name="set">
+			<set>
+				<value>set1</value>
+				<value>set2</value>
+				<value>set3</value>
+			</set>
+		</property>
+		<property name="map">
+			<map>
+				<entry key="k1" value="v1"></entry>
+				<entry key="k2" value="v1"></entry>
+				<entry key="k3" value="v1"></entry>
+			</map>
+		</property>
+		<property name="props">
+		<!-- <props>
+			<prop key="p1">v1</prop>
+		</props> -->
+			<value>
+				p1=v1
+				p2=v2
+				p3=v3
+			</value>
+		</property>
+	</bean>
+</beans>

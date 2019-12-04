@@ -1,0 +1,52 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	<!-- 配置目标对象 -->
+	<bean id="target" class="com.briup.aop.bean.UserDaoImpl"></bean>
+	<!-- 配置增强 -->
+	<bean id="advice" class="com.briup.aop.before.BeforeTest"></bean>
+	<bean id="advisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+		<property name="advice" ref="advice"></property>
+		<property name="patterns">
+			<list>
+				<!-- <value>.*User</value> -->
+				<!-- 方法名字中含有add字符串的 -->
+				<!-- <value>.*add.*</value> -->
+				<value>com.briup.aop.bean.UserDao.addUser</value>
+			</list>
+		</property>
+	</bean>
+	<!-- <bean id="advisor" class="org.springframework.aop.support.NameMatchMethodPointcutAdvisor">
+		<property name="advice" ref="advice"></property>
+		<property name="mappedNames">
+			<list>
+				<value>addUser</value>
+				<value>taddUser</value>
+			</list>
+		</property>
+	</bean> -->
+	
+	<!-- 配置代理对象 -->
+	<bean name="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+		<property name="target" ref="target"></property>
+		<property name="interfaces">
+			<list>
+				<value>com.briup.aop.bean.UserDao</value>
+			</list>
+		</property>
+		<!-- <property name="interceptorNames" value="advice"></property> -->
+		<property name="interceptorNames" value="advisor"></property>
+	</bean>
+	<!-- <bean id="auto" class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+	</bean> -->
+	<bean id="auto" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>target</value>
+			</list>
+		</property>
+		<property name="interceptorNames" value="advisor"></property>
+	</bean>
+</beans>

@@ -1,0 +1,55 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+<!-- 	<bean id="stu1" class="com.briup.bean.Student">
+		<property name="idL" value="1"></property>
+		<property name="name" value="zhangsan"></property>
+		<property name="age" value="19"></property>
+		<property name="email" value="zhangsan@123.com"></property>
+		<property name="adres" ref="adres"></property>
+	</bean>
+	
+	<bean id="adres" class="com.briup.bean.Address" >
+		<property name="country" value="zhongguo"></property>
+		<property name="province" value="jiangsu"></property>
+		<property name="city" value="kunshan"></property>
+	</bean>
+	 -->
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!-- 
+		将自定义的编辑器，注册给spring容器知道
+	 -->
+	<bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+		<property name="customEditors">
+			<map>
+				<entry key="com.briup.bean.Address" value="com.briup.ioc.proEditor.AddressEditor"></entry>
+			</map>
+		</property>
+	</bean>
+	<bean name="stu1" class="com.briup.bean.Student">
+		<property name="id" value="1"></property>
+		<property name="name" value="zhangsan"></property>
+		<property name="age" value="18"></property>
+		<property name="email" value="zhangsan@123.com"></property>
+		<property name="addres" value="zhongguo,jiangsu,kunshan"></property>
+	</bean>
+	<!--<bean id="adres" class="com.briup.bean.Address">
+		<property name="country" value="zhongguo"></property>
+		<property name="province" value="jiangsu"></property>
+		<property name="city" value="kunshan"></property>
+	</bean> -->
+</beans>

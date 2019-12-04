@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	<!-- oracle数据库厂商提供的DataSource的实现 -->
+	<!--<bean name="dataSource" class="oracle.jdbc.pool.OracleConnectionPoolDataSource">
+		<property name="networkProtocol" value="tcp"></property>
+		<property name="serverName" value="localhost"></property>
+		<property name="driverType" value="thin"></property>
+		<property name="portNumber" value="1521"></property>
+		<property name="databaseName" value="xe"></property>
+		<property name="user" value="briup"></property>
+		<property name="password" value="briup"></property>
+	</bean>-->
+	<!--<bean name="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:oracle:thin:@localhost:1521:xe</value>
+		</property>
+		<property name="username" value="briup"></property>
+		<property name="password" value="briup"></property>
+	</bean>-->
+	
+	<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName">
+			<value>oracle.jdbc.driver.OracleDriver</value>
+		</property>
+		<property name="url">
+			<value>jdbc:oracle:thin:@localhost:1521:xe</value>
+		</property>
+		<property name="username" value="briup"></property>
+		<property name="password" value="briup"></property>
+	</bean>
+	<bean name="dao" class="db.dao.impl.JDBCImpl">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+</beans>

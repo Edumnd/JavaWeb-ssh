@@ -1,0 +1,27 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+           http://www.springframework.org/schema/aop
+           http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+    <!-- 配置目标对象 -->
+    <bean id="target" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean id="target2" class="com.briup.aop.bean.Impl"></bean>
+    <!-- 增强 -->
+    <bean id="advice" class="com.briup.aop.aopconfig.TypeAdvice"></bean>
+    <bean name="ad" class="com.briup.aop.after.AfterTest"></bean>
+    <aop:config>
+    	<!-- <aop:aspect id="myAspect" ref="advice">
+    		<aop:pointcut expression="execution(* com.briup.aop.bean.UserDao.*(..))" id="myPointcut"/>
+    		<aop:after-throwing method="after" pointcut-ref="myPointcut"/>
+    		<aop:before method="before" pointcut-ref="myPointcut"/>
+    		<aop:after method="after" pointcut-ref="myPointcut"/>
+    		<aop:after-returning method="after" pointcut-ref="myPointcut"/>
+    		<aop:around method="around" pointcut="execution(* com.briup.aop.bean.UserDaoImpl.*User(..))"/>
+    		<aop:after-throwing method="throwingTest" pointcut-ref="myPointcut" throwing="ex"/>
+    	</aop:aspect> -->
+    	<aop:advisor advice-ref="ad" pointcut="execution(* com.briup.aop.bean.UserDaoImpl.*(..))"/>
+    </aop:config>       
+</beans>

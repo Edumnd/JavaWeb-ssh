@@ -1,0 +1,58 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:u="http://www.springframework.org/schema/util"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+http://www.springframework.org/schema/util
+http://www.springframework.org/schema/util/spring-util-3.2.xsd
+">
+	<u:constant static-field="com.briup.ioc.coll.CollTest.str" id="str"/>
+	<u:list id="listT" list-class="java.util.ArrayList">
+				<value>list1</value>
+				<value>list2</value>
+				<value>list3</value>
+	</u:list>
+	<!-- id:唯一标示符，值只能有一个
+		 name：名字，名字可以有多个，如果要给name赋值多个，
+		 		中间可以使用,分隔
+	 -->
+	<bean id="c1,c2" name="coll,coll2,coll3" class="com.briup.ioc.coll.CollTest">
+		<property name="list" ref="listT">
+		<!-- 	<u:list list-class="java.util.LinkedList" value-type="java.lang.String">
+				<value>list1</value>
+				<value>list2</value>
+				<value>list3</value>
+			</u:list> -->
+		</property>
+		<property name="set">
+			<u:set set-class="java.util.HashSet">
+				<value>set1</value>
+				<value>set2</value>
+				<value>set3</value>
+			</u:set>
+		</property>
+		<property name="map">
+			<u:map map-class="java.util.HashMap">
+				<entry key="k1" value="v1"></entry>
+				<entry key="k2" value="v1"></entry>
+				<entry key="k3" value="v1"></entry>
+			</u:map>
+		</property>
+		<property name="props">
+		<!-- <props>
+			<prop key="p1">v1</prop>
+		</props> -->
+		<!-- <u:properties>
+			<prop key="p1">v1</prop>
+		</u:properties> -->
+		<u:properties location="com/briup/ioc/coll/prop.properties"></u:properties>
+		</property>
+	</bean>
+	
+</beans>
+
+
+
+
+
+
