@@ -1,0 +1,39 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<!-- 
+		Teacher tea = new Teacher();
+		tea.setId(100);
+		long id = 100L;
+	 -->
+	<bean name="tea" class="com.briup.bean.Teacher">
+		<!-- 
+			通过set注入时，property标签中name的值
+			一定要符合setXxx方法名字去掉set字符串之后
+			，首字母大写以后的格式一致。
+		 -->
+		<property name="Id" value="1"></property>
+		<property name="name" value="zhangsan"></property>
+		<!-- 
+			Student stu = new Student();
+			tea.setStu(stu);
+		 -->
+		<property name="stu" ref="stu"></property>
+		
+	</bean>
+	<!-- 
+		Long id = 100L;
+	 -->
+	<bean name="stu" class="com.briup.bean.Student">
+		<property name="id" value="100"></property>
+		<property name="name" value="zhangsan"></property>
+		<property name="age" value="20"></property>
+	</bean>
+	
+	<bean name="stu2" class="com.briup.bean.Student">
+		<property name="id" value="200"></property>
+	</bean>
+	
+</beans>

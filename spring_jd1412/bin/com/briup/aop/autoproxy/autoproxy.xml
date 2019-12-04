@@ -1,0 +1,46 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+    <bean name="target" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="target1" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="target2" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="before" class="com.briup.aop.before.BeforeTest"></bean>
+    
+    <bean name="beforeAdvisor" class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+    	<property name="advice" ref="before"></property>
+    	<property name="patterns">
+    		<array>
+    			<!-- <value>com.briup.aop.bean.UserDao.deleteUser</value> -->
+    			<value>.*User</value>
+    		</array>
+    	</property>
+    </bean>
+    <!-- 按照BeanName自动代理 -->
+   <!--  <bean name="proxy" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+    	注入需要被代理的bean的名字
+    	<property name="beanNames">
+    		<array>
+    			<value>target</value>
+    			<value>target1</value>
+    		</array>
+    	</property>
+    	代理对象所要执行的操作
+    	<property name="interceptorNames" value="beforeAdvisor"></property>
+    </bean> -->
+    <!-- 按照advisor自动代理 -->
+    <bean name="proxy" 
+    class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+    </bean>
+</beans>
+
+
+
+
+
+
+
+
+
+

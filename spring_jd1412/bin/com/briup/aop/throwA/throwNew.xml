@@ -1,0 +1,34 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+   	<!-- 配置目标对象 -->
+    <bean name="target" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="target1" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="target2" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="target3" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <!-- 配置异常通知，代理对象将来所要执行的处理程序 -->
+    <bean name="throwa" class="com.briup.aop.throwA.ThrowTest"></bean>
+   	<bean name="after" class="com.briup.aop.after.AfterTest"></bean>
+    <bean name="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+    	<property name="target" ref="target"></property>
+    	<property name="interfaces">
+    		<array>
+    			<value>com.briup.aop.bean.UserDao</value>
+    		</array>
+    	</property>
+    	<property name="interceptorNames" >
+    		<array>
+    			<value>throwa</value>
+    			<value>after</value>
+    		</array>
+    	</property>
+    </bean>
+  
+  
+</beans>
+
+
+
+

@@ -1,0 +1,42 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:context="http://www.springframework.org/schema/context"
+		xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+	<!-- 在通知spring容器，bean对象中使用了annotation的配置 -->
+	<!-- <context:annotation-config></context:annotation-config>
+	 -->
+	<context:component-scan base-package="com.briup.ioc.annotation"></context:component-scan>
+	
+	
+	<!-- <bean name="srcBean" class="com.briup.ioc.annotation.SrcBean">
+		<property name="id" value="100"></property>
+	</bean>
+	  -->
+	  
+<!-- 	 <bean name="srcBean1" class="com.briup.ioc.annotation.SrcBean" >
+		<property name="id" value="102"></property>
+	</bean>
+	<bean name="srcBean" class="com.briup.ioc.annotation.SrcBean" >
+		<property name="id" value="88"></property>
+	</bean>
+	 <bean name="src" class="com.briup.ioc.annotation.SrcBean" >
+		<property name="id" value="99"></property>
+	</bean> -->
+	<!-- <bean name="src" class="java.lang.String">
+		<constructor-arg value="str"></constructor-arg>
+	</bean> -->
+
+	<!-- <bean name="destBean" class="com.briup.ioc.annotation.DestBean">
+	</bean> -->
+</beans>
+
+
+
+
+
+
+
+	

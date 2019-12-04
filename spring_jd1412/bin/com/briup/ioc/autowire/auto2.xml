@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+ 
+	<bean name="tea" class="com.briup.bean.Teacher">
+		<property name="id" value="11"></property>
+		<property name="name" value="zhangsan"></property>
+		<property name="age" value="21"></property>
+	</bean>
+	<bean name="teacher2" class="com.briup.bean.Teacher">
+		<property name="id" value="12"></property>
+		<property name="name" value="wagnwu"></property>
+		<property name="age" value="22"></property>
+	</bean>
+</beans>

@@ -1,0 +1,46 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+    <bean name="target" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="target1" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="target2" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="target3" class="com.briup.aop.bean.UserDaoImpl"></bean>
+    <bean name="throwa" class="com.briup.aop.throwA.ThrowTest"></bean>
+  <!--   <bean name="proxy" class="org.springframework.aop.framework.ProxyFactoryBean">
+    	<property name="target" ref="target"></property>
+    	<property name="interfaces">
+    		<array>
+    			<value>com.briup.aop.bean.UserDao</value>
+    		</array>
+    	</property>
+    	<property name="interceptorNames" >
+    		<array>
+    			<value>throwa</value>
+    		</array>
+    	</property>
+    </bean>
+   -->
+   <!-- 按照beanName自动代理
+   		通过spring来获取对象的时候应该使用目标对象额beanName来自动获取
+    -->
+   <bean name="proxy" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+   		<property name="beanNames">
+   			<array>
+   				<value>target</value>
+   				<value>target1</value>
+   				<value>target2</value>
+   			</array>   		
+   		</property>
+   		<property name="interceptorNames">
+   			<list>
+   				<value>throwa</value>
+   			</list>
+   		</property>
+   </bean>
+</beans>
+
+
+
+

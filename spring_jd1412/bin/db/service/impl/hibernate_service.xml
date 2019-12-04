@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	<bean name="service" class="db.service.impl.ServiceImpl">
+		<property name="dao" ref="dao"></property>
+	</bean>
+	<!-- 使用的切面/功能 -->
+	<bean name="tranManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<!-- 配置增强， -->
+	<bean name="tranInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="tranManager"></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="regist">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+	</bean>
+	<!-- <bean id="proxy" class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<value>service</value>
+			</list>
+		</property>
+		<property name="interceptorNames" value="tranInterceptor"></property>
+	</bean> -->
+	<bean name="tranProxy" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="target" ref="service"></property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*User">PROPAGATION_REQUIRED,-Exception</prop>
+			</props>
+		</property>
+		<property name="transactionManager" ref="tranManager"></property>
+	</bean>
+</beans>

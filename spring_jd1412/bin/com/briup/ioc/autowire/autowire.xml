@@ -1,0 +1,38 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.2.xsd"
+       default-autowire="byType">
+    <!-- 
+    	autowire:
+    		byType:按照属性类型注入，如果找不到符合定义的类型，注入空值
+    				如果找到多个匹配的，throw Exception
+    		byName:按照beanName自动注入，beanName符合属性set方法的定义。
+    		default:需要结合beans标签的default-autowire属性
+    		
+    		如果default-autowire,autowire,以及bean标签中指明注入了，那么
+    		优先级按照远近位置排序，越近优先级越高。(越明确，优先级越高)	
+     -->
+     
+     
+     
+     
+     
+	<bean name="stu" class="com.briup.bean.Student" autowire="byName"> 
+		<property name="id" value="1"></property>
+		<property name="name" value="test"></property>
+		<property name="age" value="20"></property>
+		<property name="addres" ref="as"></property>
+	</bean>
+	<bean name="as" class="com.briup.bean.Address">
+		<property name="country" value="zhongguo"></property>
+		<property name="city" value="kunshan"></property>
+		<property name="province" value="jiangsu"></property>
+	</bean>
+	<!-- <bean name="as1" class="com.briup.bean.Address">
+		<property name="country" value="zhongguo"></property>
+		<property name="city" value="kunshan"></property>
+		<property name="province" value="jiangsu"></property>
+	</bean> -->
+	
+</beans>
